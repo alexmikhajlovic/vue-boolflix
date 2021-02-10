@@ -1,0 +1,82 @@
+* {margin: 0; padding: 0; box-sizing: border-box;}
+
+body {
+    /* max-width: 1200px; */
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    margin: auto;
+}
+
+/* HEADER */
+header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    border-bottom: 1px solid #e70d1b;
+}
+header img {
+    height: 75%;
+    cursor: pointer;
+}
+
+/* TODO: (edit) Change Language */
+.language-choice {
+    text-align: right;
+    padding: 10px;
+    color: #e70d1b;
+    font-weight: bold;
+}
+
+
+/* MAIN */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Input */
+input {
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-bottom: 1px solid #e70d1b;
+}
+input:hover,
+select:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px 10px 0 0;
+}
+
+/* Default Icons */
+i {
+    padding: 10px;
+    cursor: pointer;
+}
+i:hover{
+    color: #e70d1b;
+}
