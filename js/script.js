@@ -5,6 +5,7 @@ var app = new Vue ({
         apiKey: '302a53c30542f331c5da295c0142c319',
         inputQuery: '',
         language: 'en-US',
+        movies: [],
         visible: true
     },
     methods: {
@@ -19,7 +20,10 @@ var app = new Vue ({
                 }
             })
             .then((result) => {
-                console.log(result.data.results);
+                // console.log(result.data.results);
+                // this.movies = (result.data.results);
+                // this.movies.push(result.data.results);
+                // console.log(movies)
             })
             .catch((error) => alert('ERROR'));
         },
