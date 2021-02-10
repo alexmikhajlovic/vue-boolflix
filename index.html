@@ -36,15 +36,51 @@
 
         <!-- Change Language  -->
         <div class="language-choice">
-            <span class="choose-language" @click="ita()">ITA</span>
-            <small> - </small>
-            <span class="choose-language" @click="eng()">ENG</span>
+            <img src="img/italy.png" @click="ita()" class="choose-language" alt="ITA">
+
+            <img src="img/united-states.png" @click="eng()" class="choose-language" alt="ENG">
         </div>
         
         <!-- MAIN -->
         <main>
             
-            <div class="content-box">
+            <div class="row">
+
+                <div class="content-box" v-for="movie in movies">
+
+                    <img :src="urlImg + movie.poster_path" alt="Cover">
+
+                    <h3>{{movie.original_title}}</h3>
+
+                    <p>{{movie.overview}}</p>
+                    
+                    <p>{{movie.release_date}}</p>
+
+                    <p><small>{{movie.original_language}}</small></p>
+
+                    <p><small>{{movie.vote_average}}</small></p>
+    
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="content-box" v-for="tvserie in tvSeries">
+
+                    <img :src="urlImg + tvserie.poster_path" alt="Cover">
+
+                    <h3>{{tvserie.original_name}}</h3>
+
+                    <p>{{tvserie.overview}}</p>
+                    
+                    <p>{{tvserie.first_air_date}}</p>
+
+                    <p><small>{{tvserie.popularity}}</small></p>
+
+                    <p><small>{{tvserie.vote_average}}</small></p>
+    
+                </div>
 
             </div>
 

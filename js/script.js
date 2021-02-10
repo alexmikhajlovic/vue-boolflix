@@ -2,15 +2,17 @@ var app = new Vue ({
 
     el: ('#app'),
     data: {
+        movies: [],
+        tvSeries: [],
         apiKey: '302a53c30542f331c5da295c0142c319',
         inputQuery: '',
         language: 'en-US',
-        movies: [],
+        urlImg: 'https://image.tmdb.org/t/p/w185',
         visible: true
     },
     methods: {
 
-        search() {
+        search(index) {
             axios
             .get('https://api.themoviedb.org/3/search/movie',{
                 params: {
@@ -20,10 +22,24 @@ var app = new Vue ({
                 }
             })
             .then((result) => {
-                // console.log(result.data.results);
-                // this.movies = (result.data.results);
-                // this.movies.push(result.data.results);
-                // console.log(movies)
+                this.movies.splice(index,1);
+                this.movies.push(...result.data.results);
+                this.inputQuery = '';
+            })
+            .catch((error) => alert('ERROR'));
+
+            axios
+            .get('https://api.themoviedb.org/3/search/tv',{
+                params: {
+                    api_key: this.apiKey,
+                    query: this.inputQuery,
+                    language: this.language
+                }
+            })
+            .then((result) => {
+                this.tvSeries.splice(index,1);
+                this.tvSeries.push(...result.data.results);
+                this.inputQuery = '';
             })
             .catch((error) => alert('ERROR'));
         },
