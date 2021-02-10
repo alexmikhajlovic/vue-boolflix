@@ -12,7 +12,9 @@ var app = new Vue ({
     },
     methods: {
 
-        search(index) {
+        search() {
+            this.movies.splice(0);
+            this.tvSeries.splice(0);
             axios
             .get('https://api.themoviedb.org/3/search/movie',{
                 params: {
@@ -22,7 +24,6 @@ var app = new Vue ({
                 }
             })
             .then((result) => {
-                this.movies.splice(index,1);
                 this.movies.push(...result.data.results);
                 this.inputQuery = '';
             })
@@ -37,7 +38,6 @@ var app = new Vue ({
                 }
             })
             .then((result) => {
-                this.tvSeries.splice(index,1);
                 this.tvSeries.push(...result.data.results);
                 this.inputQuery = '';
             })

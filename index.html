@@ -43,12 +43,12 @@
         
         <!-- MAIN -->
         <main>
-            
+
             <div class="row">
 
                 <div class="content-box" v-for="movie in movies">
 
-                    <img :src="urlImg + movie.poster_path" alt="Cover">
+                    <img :src="urlImg + movie.poster_path" alt="Image currently not available.">
 
                     <h3>{{movie.original_title}}</h3>
 
@@ -68,7 +68,7 @@
 
                 <div class="content-box" v-for="tvserie in tvSeries">
 
-                    <img :src="urlImg + tvserie.poster_path" alt="Cover">
+                    <img :src="urlImg + tvserie.poster_path" alt="Image currently not available.">
 
                     <h3>{{tvserie.original_name}}</h3>
 
