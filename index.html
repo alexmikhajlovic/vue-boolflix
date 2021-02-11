@@ -26,7 +26,7 @@
             <!-- Search-Bar -->
             <div class="search-bar">
                 <input type="text" v-model="inputQuery" @keyup.enter="search" placeholder="Search">
-                <i class="fas fa-search"></i>
+                <i class="fas fa-search" @click="search"></i>
                 <i class="fas fa-gift"></i>
                 <i class="fas fa-bell"></i>
                 <i class="fas fa-user"></i>
@@ -36,14 +36,19 @@
 
         <!-- Change Language  -->
         <div class="language-choice">
-            <img src="img/italy.png" @click="ita()" class="choose-language" alt="ITA">
 
-            <img src="img/united-states.png" @click="eng()" class="choose-language" alt="ENG">
+            <small id="selected-language">ENG</small>
+
+            <img src="img/italy.png" @click="ita()" :class="(language == 'it-IT') ? activeClass : ''" class="choose-language" alt="ITA" title="ITALIANO">
+
+            <img src="img/united-states.png" @click="eng()" :class="(language == 'en-US') ? activeClass : ''" class="choose-language" alt="ENG" title="ENGLISH">
+
         </div>
         
         <!-- MAIN -->
         <main>
 
+            <!-- Movies -->
             <div class="row">
 
                 <div class="content-box" v-for="movie in movies">
@@ -52,11 +57,15 @@
 
                     <h3>{{movie.original_title}}</h3>
 
+                    <!-- <h6>{{movie.title}}</h6> -->
+                    <h6 v-if="language == 'it-IT' && movie.original_title != movie.title">{{movie.title}}</h6>
+
                     <p>{{movie.overview}}</p>
                     
-                    <p>{{movie.release_date}}</p>
+                    <p><i class="far fa-calendar-alt"></i> {{movie.release_date}}</p>
 
-                    <p><small>{{movie.original_language}}</small></p>
+                    <!-- <p><small>{{movie.original_language}}</small></p> -->
+                    <p><img v-if="movie.original_language == 'en'" src="img/united-states-mini.png" alt="US"></p>
 
                     <p><small>{{movie.vote_average}}</small></p>
     
@@ -64,6 +73,7 @@
 
             </div>
 
+            <!-- TV Series -->
             <div class="row">
 
                 <div class="content-box" v-for="tvserie in tvSeries">
@@ -72,11 +82,14 @@
 
                     <h3>{{tvserie.original_name}}</h3>
 
+                    <!-- <h6>{{movie.title}}</h6> -->
+                    <h6 v-if="language == 'it-IT' && tvserie.original_title != tvserie.title">{{tvserie.title}}</h6>
+
                     <p>{{tvserie.overview}}</p>
                     
-                    <p>{{tvserie.first_air_date}}</p>
+                    <p><i class="far fa-calendar-alt"></i> {{tvserie.first_air_date}}</p>
 
-                    <p><small>{{tvserie.popularity}}</small></p>
+                    <p><small><i class="fas fa-users"></i> {{tvserie.popularity}}</small></p>
 
                     <p><small>{{tvserie.vote_average}}</small></p>
     

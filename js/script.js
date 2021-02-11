@@ -8,7 +8,8 @@ var app = new Vue ({
         inputQuery: '',
         language: 'en-US',
         urlImg: 'https://image.tmdb.org/t/p/w185',
-        visible: true
+        activeClass: 'active',
+        visible: true,
     },
     methods: {
 
@@ -47,11 +48,11 @@ var app = new Vue ({
         // Change Language
         ita() {
             this.language = 'it-IT';
-            console.log(this.language);
+            document.getElementById('selected-language').innerHTML = 'ITA';
         },
         eng() {
             this.language = 'en-US';
-            console.log(this.language);
+            document.getElementById('selected-language').innerHTML = 'ENG';
         },
     },
     

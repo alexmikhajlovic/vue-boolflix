@@ -21,46 +21,53 @@ header img {
     height: 75%;
     cursor: pointer;
 }
+header i {
+    padding: 10px;
+}
 
-/* TODO: (edit) Change Language */
+/* Change Language */
 .language-choice {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: grey;
     text-align: right;
     padding: 10px 25px;
-    color: #e70d1b;
-    font-weight: bold;
 }
 .choose-language {
     filter: grayscale(1);
-    padding: 5px;
+    padding: 7px;
     cursor: pointer;
     border-radius: 50%;
 }
-.choose-language:hover {
+.choose-language:hover,
+.choose-language.active {
     filter: grayscale(0);
-    -webkit-transform: scale(1.1, 1.1);
-    -moz-transform: scale(1.1, 1.1);
-    -o-transform: scale(1.1, 1.1);
-    -ms-transform: scale(1.1, 1.1);
-    transform: scale(1.1, 1.1);
+    -webkit-transform: scale(1.2, 1.2);
+    -moz-transform: scale(1.2, 1.2);
+    -o-transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2, 1.2);
+    transform: scale(1.2, 1.2);
 }
 
 
 /* MAIN */
 .row{
-    width: 100%;
-    overflow: auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    overflow: auto;
 }
 .content-box {
-    width: 185px;
-    height: 250px;
+    width: 190px;
+    height: 280px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 5px;
-    margin: 20px;
+    margin: 10px;
+    text-align: center;
     overflow-y: auto;
+    overflow-x: hidden;
     cursor: pointer;
 }
 .content-box:hover{
@@ -70,7 +77,10 @@ header img {
     -ms-transform: scale(1.1, 1.1);
     transform: scale(1.1, 1.1);
 }
-.content-box h3, .content-box p{
+.content-box h3,
+.content-box h6,
+.content-box p{
+    text-align: left;
     padding: 10px;
 }
 .content-box p small{
@@ -92,24 +102,15 @@ input {
     border: none;
     border-bottom: 1px solid #e70d1b;
 }
-input:hover,
-select:hover {
+input:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px 10px 0 0;
 }
 
 /* Default Icons */
 i {
-    padding: 10px;
     cursor: pointer;
 }
 i:hover{
     color: #e70d1b;
-}
-
-.break {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }
