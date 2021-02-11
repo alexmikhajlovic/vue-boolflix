@@ -8,9 +8,9 @@ var app = new Vue ({
         inputQuery: '',
         language: 'en-US',
         languages: ['en', 'it', 'ja', 'de', 'es', 'fr', 'ru'],
-        urlImg: 'https://image.tmdb.org/t/p/w185',
+        urlImg: 'https://image.tmdb.org/t/p/w342',
         imgPath: 'img/languages/',
-        imgFormat: '.png',
+        imgFormat: '.svg',
         activeClass: 'active',
     },
     methods: {
@@ -29,6 +29,7 @@ var app = new Vue ({
             .then((result) => {
                 this.movies.push(...result.data.results);
                 this.inputQuery = '';
+                this.vote(this.movies);
             })
             .catch((error) => alert('ERROR'));
 
@@ -43,8 +44,17 @@ var app = new Vue ({
             .then((result) => {
                 this.tvSeries.push(...result.data.results);
                 this.inputQuery = '';
+                this.vote(this.tvSeries);
+
             })
             .catch((error) => alert('ERROR'));
+        },
+
+        // Vote rounding
+        vote(array){
+            array.forEach((element) => {
+                element.vote_average = parseInt(element.vote_average * 5 / 10);
+            });
         },
 
         // Change Language

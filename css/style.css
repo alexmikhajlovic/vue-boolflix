@@ -9,7 +9,7 @@ body {
 
 /* HEADER */
 header {
-    height: 80px;
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,16 +26,18 @@ header i {
 
 /* Change Language */
 .language-choice {
+    background-color: transparent;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     color: grey;
     text-align: right;
-    padding: 10px 25px;
+    padding: 0 25px;
 }
 .choose-language {
+    height: 18px;
     filter: grayscale(1);
-    margin: 12.5px;
+    margin: 12px;
     cursor: pointer;
     border-radius: 50%;
 }
@@ -59,15 +61,16 @@ header i {
     overflow: auto;
 }
 .content-box {
-    width: 190px;
-    height: 280px;
+    width: 342px;
+    height: 500px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 5px;
-    margin: 20px 10px;
+    margin: 40px 10px;
     text-align: center;
     overflow-y: auto;
     overflow-x: hidden;
     cursor: pointer;
+    position: relative;
 }
 .content-box:hover{
     -webkit-transform: scale(1.1, 1.1);
@@ -77,6 +80,10 @@ header i {
     transform: scale(1.1, 1.1);
     border: 1px solid #e70d1b;
 }
+.content-box:hover > .cover {
+    opacity: 0.5;
+    height: 100%;
+}
 .content-box h3,
 .content-box h6,
 .content-box p{
@@ -84,10 +91,12 @@ header i {
     padding: 10px;
 }
 .content-box p small{
-    color: #e70d1b;
+    color: grey;
 }
-
-
+.content-box p img{
+    vertical-align: middle;
+    width: 16px;
+}
 
 
 
@@ -116,4 +125,7 @@ i:hover{
 }
 i.active{
     color: #e70d1b;
+}
+i.empty-stars {
+    color: rgba(255, 255, 255, 0.5);
 }
