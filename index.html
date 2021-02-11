@@ -26,7 +26,7 @@
             <!-- Search-Bar -->
             <div class="search-bar">
                 <input type="text" v-model="inputQuery" @keyup.enter="search" placeholder="Search">
-                <i class="fas fa-search" @click="search"></i>
+                <i :class="(inputQuery != '') ? activeClass : ''" class="fas fa-search" @click="search"></i>
                 <i class="fas fa-gift"></i>
                 <i class="fas fa-bell"></i>
                 <i class="fas fa-user"></i>
@@ -35,62 +35,88 @@
         </header>
 
         <!-- Change Language  -->
-        <div class="language-choice">
+        <section class="language-choice">
+
+            <img src="img/languages/it.png" @click="ita()" :class="(language == 'it-IT') ? activeClass : ''" class="choose-language" alt="ITA" title="ITALIANO">
+
+            <img src="img/languages/ja.png" @click="jap()" :class="(language == 'ja-JA') ? activeClass : ''" class="choose-language" alt="JPN" title="日本人">
+            
+            <img src="img/languages/de.png" @click="de()" :class="(language == 'de-DE') ? activeClass : ''" class="choose-language" alt="DEU" title="DEUTCH">
+            
+            <img src="img/languages/es.png" @click="esp()" :class="(language == 'es-ES') ? activeClass : ''" class="choose-language" alt="ESP" title="ESPAÑOL">
+            
+            <img src="img/languages/fr.png" @click="fr()" :class="(language == 'fr-FR') ? activeClass : ''" class="choose-language" alt="FR" title="FRANÇAIS">
+            
+            <img src="img/languages/ru.png" @click="rus()" :class="(language == 'ru-RU') ? activeClass : ''" class="choose-language" alt="RUS" title="РУССКИЙ">
+            
+            <img src="img/languages/en.png" @click="eng()" :class="(language == 'en-US') ? activeClass : ''" class="choose-language" alt="ENG" title="ENGLISH">
 
             <small id="selected-language">ENG</small>
 
-            <img src="img/italy.png" @click="ita()" :class="(language == 'it-IT') ? activeClass : ''" class="choose-language" alt="ITA" title="ITALIANO">
+        </section>
 
-            <img src="img/united-states.png" @click="eng()" :class="(language == 'en-US') ? activeClass : ''" class="choose-language" alt="ENG" title="ENGLISH">
-
-        </div>
-        
         <!-- MAIN -->
         <main>
 
-            <!-- Movies -->
+            <!-- ! Movies ! -->
             <div class="row">
 
                 <div class="content-box" v-for="movie in movies">
 
-                    <img :src="urlImg + movie.poster_path" alt="Image currently not available.">
+                    <!-- Cover -->
+                    <img v-if="movie.poster_path != null" :src="urlImg + movie.poster_path" alt="Cover">
+                    <img v-else src="img/image-notfound.png" alt="" style="margin-bottom: 65px;">
 
+                    <!-- Original Title -->
                     <h3>{{movie.original_title}}</h3>
 
                     <!-- <h6>{{movie.title}}</h6> -->
-                    <h6 v-if="language == 'it-IT' && movie.original_title != movie.title">{{movie.title}}</h6>
+                    <h6 v-if="language != 'en-US' && movie.original_title != movie.title">{{movie.title}}</h6>
 
+                    <!-- Overview -->
                     <p>{{movie.overview}}</p>
                     
+                    <!-- Release Date -->
                     <p><i class="far fa-calendar-alt"></i> {{movie.release_date}}</p>
 
-                    <!-- <p><small>{{movie.original_language}}</small></p> -->
-                    <p><img v-if="movie.original_language == 'en'" src="img/united-states-mini.png" alt="US"></p>
+                    <!-- Original Language -->
+                    <p><img v-if="languages.includes(movie.original_language)" :src="imgPath + movie.original_language + imgFormat" :alt="movie.original_language"></p>
 
+                    <!-- Vote -->
                     <p><small>{{movie.vote_average}}</small></p>
     
                 </div>
 
             </div>
 
-            <!-- TV Series -->
+            <!-- ! TV Series ! -->
             <div class="row">
 
                 <div class="content-box" v-for="tvserie in tvSeries">
 
-                    <img :src="urlImg + tvserie.poster_path" alt="Image currently not available.">
+                    <!-- Cover -->
+                    <img v-if="tvserie.poster_path != null" :src="urlImg + tvserie.poster_path" alt="Cover">
+                    <img v-else src="img/image-notfound.png" alt="" style="margin-bottom: 65px;">
 
+                    <!-- Original Title -->
                     <h3>{{tvserie.original_name}}</h3>
 
                     <!-- <h6>{{movie.title}}</h6> -->
-                    <h6 v-if="language == 'it-IT' && tvserie.original_title != tvserie.title">{{tvserie.title}}</h6>
+                    <h6 v-if="languages == 'it-IT' && tvserie.original_title != tvserie.title">{{tvserie.title}}</h6>
 
+                    <!-- Overview -->
                     <p>{{tvserie.overview}}</p>
                     
+                    <!-- First Release Date -->
                     <p><i class="far fa-calendar-alt"></i> {{tvserie.first_air_date}}</p>
 
+                    <!-- Original Language -->
+                    <p><img v-if="languages.includes(tvserie.original_language)" :src="imgPath + tvserie.original_language + imgFormat" :alt="tvserie.original_language"></p>
+
+                    <!-- Popularity -->
                     <p><small><i class="fas fa-users"></i> {{tvserie.popularity}}</small></p>
 
+                    <!-- Vote -->
                     <p><small>{{tvserie.vote_average}}</small></p>
     
                 </div>

@@ -7,9 +7,11 @@ var app = new Vue ({
         apiKey: '302a53c30542f331c5da295c0142c319',
         inputQuery: '',
         language: 'en-US',
+        languages: ['en', 'it', 'ja', 'de', 'es', 'fr', 'ru'],
         urlImg: 'https://image.tmdb.org/t/p/w185',
+        imgPath: 'img/languages/',
+        imgFormat: '.png',
         activeClass: 'active',
-        visible: true,
     },
     methods: {
 
@@ -46,14 +48,35 @@ var app = new Vue ({
         },
 
         // Change Language
-        ita() {
-            this.language = 'it-IT';
-            document.getElementById('selected-language').innerHTML = 'ITA';
-        },
         eng() {
             this.language = 'en-US';
             document.getElementById('selected-language').innerHTML = 'ENG';
         },
+        ita() {
+            this.language = 'it-IT';
+            document.getElementById('selected-language').innerHTML = 'ITA';
+        },
+        jap() {
+            this.language = 'ja-JA';
+            document.getElementById('selected-language').innerHTML = 'JPN';
+        },
+        de() {
+            this.language = 'de-DE';
+            document.getElementById('selected-language').innerHTML = 'DEU';
+        },
+        esp() {
+            this.language = 'es-ES';
+            document.getElementById('selected-language').innerHTML = 'ESP';
+        },
+        fr() {
+            this.language = 'fr-FR';
+            document.getElementById('selected-language').innerHTML = 'FR';
+        },
+        rus() {
+            this.language = 'ru-RU';
+            document.getElementById('selected-language').innerHTML = 'RUS';
+        },
+        
     },
     
 });
