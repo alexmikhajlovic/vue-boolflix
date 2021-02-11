@@ -36,19 +36,21 @@
         <!-- Change Language  -->
         <section class="language-choice">
 
-            <img src="img/languages/it.svg" @click="ita()" :class="(language == 'it-IT') ? activeClass : ''" class="choose-language" alt="ITA" title="ITALIANO">
+            <!-- <img src="img/languages/it.svg" @click="changeLanguage('it-IT', 'ITA')" :class="(language == 'it-IT') ? activeClass : ''" class="choose-language" alt="ITA" title="ITALIANO">
 
-            <img src="img/languages/ja.svg" @click="jap()" :class="(language == 'ja-JA') ? activeClass : ''" class="choose-language" alt="JPN" title="日本人">
+            <img src="img/languages/ja.svg" @click="changeLanguage('ja-JA', 'ENG')" :class="(language == 'ja-JA') ? activeClass : ''" class="choose-language" alt="JPN" title="日本人">
             
-            <img src="img/languages/de.svg" @click="de()" :class="(language == 'de-DE') ? activeClass : ''" class="choose-language" alt="DEU" title="DEUTCH">
+            <img src="img/languages/de.svg" @click="changeLanguage('de-DE', '')" :class="(language == 'de-DE') ? activeClass : ''" class="choose-language" alt="DEU" title="DEUTCH">
             
-            <img src="img/languages/es.svg" @click="esp()" :class="(language == 'es-ES') ? activeClass : ''" class="choose-language" alt="ESP" title="ESPAÑOL">
+            <img src="img/languages/es.svg" @click="changeLanguage('es-ES', '')" :class="(language == 'es-ES') ? activeClass : ''" class="choose-language" alt="ESP" title="ESPAÑOL">
             
-            <img src="img/languages/fr.svg" @click="fr()" :class="(language == 'fr-FR') ? activeClass : ''" class="choose-language" alt="FR" title="FRANÇAIS">
+            <img src="img/languages/fr.svg" @click="changeLanguage('fr-FR', '')" :class="(language == 'fr-FR') ? activeClass : ''" class="choose-language" alt="FR" title="FRANÇAIS">
             
-            <img src="img/languages/ru.svg" @click="rus()" :class="(language == 'ru-RU') ? activeClass : ''" class="choose-language" alt="RUS" title="РУССКИЙ">
+            <img src="img/languages/ru.svg" @click="changeLanguage('ru-RU', '')" :class="(language == 'ru-RU') ? activeClass : ''" class="choose-language" alt="RUS" title="РУССКИЙ">
             
-            <img src="img/languages/en.svg" @click="eng()" :class="(language == 'en-US') ? activeClass : ''" class="choose-language" alt="ENG" title="ENGLISH">
+            <img src="img/languages/en.svg" @click="changeLanguage('en-US', '')" :class="(language == 'en-US') ? activeClass : ''" class="choose-language" alt="ENG" title="ENGLISH"> -->
+
+            <img v-for="lang in languages" :src="imgPath + lang + imgFormat" :class="(lang == language) ? activeClass : ''" class="choose-language" @click="changeLanguage(lang, '')" alt="">
 
             <small id="selected-language">ENG</small>
 

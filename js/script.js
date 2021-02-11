@@ -58,34 +58,43 @@ var app = new Vue ({
         },
 
         // Change Language
-        eng() {
-            this.language = 'en-US';
-            document.getElementById('selected-language').innerHTML = 'ENG';
-        },
-        ita() {
-            this.language = 'it-IT';
-            document.getElementById('selected-language').innerHTML = 'ITA';
-        },
-        jap() {
-            this.language = 'ja-JA';
-            document.getElementById('selected-language').innerHTML = 'JPN';
-        },
-        de() {
-            this.language = 'de-DE';
-            document.getElementById('selected-language').innerHTML = 'DEU';
-        },
-        esp() {
-            this.language = 'es-ES';
-            document.getElementById('selected-language').innerHTML = 'ESP';
-        },
-        fr() {
-            this.language = 'fr-FR';
-            document.getElementById('selected-language').innerHTML = 'FR';
-        },
-        rus() {
-            this.language = 'ru-RU';
-            document.getElementById('selected-language').innerHTML = 'RUS';
-        },
+        // eng() {
+        //     this.language = 'en-US';
+        //     document.getElementById('selected-language').innerHTML = 'ENG';
+        // },
+        // ita() {
+        //     this.language = 'it-IT';
+        //     document.getElementById('selected-language').innerHTML = 'ITA';
+        // },
+        // jap() {
+        //     this.language = 'ja-JA';
+        //     document.getElementById('selected-language').innerHTML = 'JPN';
+        // },
+        // de() {
+        //     this.language = 'de-DE';
+        //     document.getElementById('selected-language').innerHTML = 'DEU';
+        // },
+        // esp() {
+        //     this.language = 'es-ES';
+        //     document.getElementById('selected-language').innerHTML = 'ESP';
+        // },
+        // fr() {
+        //     this.language = 'fr-FR';
+        //     document.getElementById('selected-language').innerHTML = 'FR';
+        // },
+        // rus() {
+        //     this.language = 'ru-RU';
+        //     document.getElementById('selected-language').innerHTML = 'RUS';
+        // },
+
+        changeLanguage(language, nome){
+
+            this.language = language;
+            document.getElementById('selected-language').innerHTML = language.toUpperCase();
+            console.log(this.language);
+
+
+        }
         
     },
     
