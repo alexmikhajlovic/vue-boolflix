@@ -25,7 +25,7 @@ header i {
 }
 
 /* Change Language */
-.language-choice {
+.languages {
     background-color: transparent;
     display: flex;
     justify-content: flex-end;
@@ -34,15 +34,15 @@ header i {
     text-align: right;
     padding: 0 25px;
 }
-.choose-language {
+.language {
     height: 18px;
     filter: grayscale(1);
     margin: 12px;
     cursor: pointer;
     border-radius: 50%;
 }
-.choose-language:hover,
-.choose-language.active {
+.language:hover,
+.language.active {
     filter: grayscale(0);
     -webkit-transform: scale(1.2, 1.2);
     -moz-transform: scale(1.2, 1.2);
@@ -82,7 +82,7 @@ header i {
     border: 1px solid #e70d1b;
 }
 .content-box:hover > .cover {
-    opacity: 0.5;
+    /* opacity: 0.5; */
     height: 100%;
 }
 .content-box h3,
@@ -105,28 +105,32 @@ header i {
 input {
     background-color: transparent;
     color: #fff;
-    outline: none;
     text-align: center;
     padding: 10px;
     margin: 10px;
     border: none;
     border-bottom: 1px solid #e70d1b;
+    outline: none;
 }
-input:hover {
+input:hover,
+input:active,
+input:focus {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px 10px 0 0;
 }
 
 /* Default Icons */
-i {
-    cursor: pointer;
-}
-i:hover{
-    color: #e70d1b;
-}
+i:hover,
 i.active{
     color: #e70d1b;
+    cursor: pointer;
 }
-i.empty-stars {
-    color: rgba(255, 255, 255, 0.5);
+
+.empty-stars {
+    color: grey;
 }
+
+@media screen and (max-width: 520px) {
+    header img {height: 30%;}
+    .languages {justify-content: center;}
+  }

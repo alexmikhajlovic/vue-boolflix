@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boolflix</title>
+    <title>Boolflix | @alexmikhajlovic</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
@@ -14,18 +14,21 @@
 </head>
 <body>
 
+    <!-- ! Start first of all ! -->
+    <!-- <img class="start-animation" src="img/logo-animation.gif" style="width: 100%;"> -->
+
     <div id="app" class="container">
 
         <!-- HEADER -->
         <header>
 
             <!-- Logo -->
-            <img src="img/logo-lg.png" alt="Logo">
+            <img src="img/logo-lg.png" alt="LOGO">
             
             <!-- Search-Bar -->
             <div class="search-bar">
                 <input type="text" v-model="inputQuery" @keyup.enter="search" placeholder="Search">
-                <i :class="(inputQuery != '') ? activeClass : ''" class="fas fa-search" @click="search"></i>
+                <i class="fas fa-search" :class=" (inputQuery != '') ? activeClass : '' " @click="search"></i>
                 <i class="fas fa-gift"></i>
                 <i class="fas fa-bell"></i>
                 <i class="fas fa-user"></i>
@@ -34,25 +37,11 @@
         </header>
 
         <!-- Change Language  -->
-        <section class="language-choice">
+        <section class="languages">
+            
+            <small id="selected-language">EN</small>
 
-            <!-- <img src="img/languages/it.svg" @click="changeLanguage('it-IT', 'ITA')" :class="(language == 'it-IT') ? activeClass : ''" class="choose-language" alt="ITA" title="ITALIANO">
-
-            <img src="img/languages/ja.svg" @click="changeLanguage('ja-JA', 'ENG')" :class="(language == 'ja-JA') ? activeClass : ''" class="choose-language" alt="JPN" title="日本人">
-            
-            <img src="img/languages/de.svg" @click="changeLanguage('de-DE', '')" :class="(language == 'de-DE') ? activeClass : ''" class="choose-language" alt="DEU" title="DEUTCH">
-            
-            <img src="img/languages/es.svg" @click="changeLanguage('es-ES', '')" :class="(language == 'es-ES') ? activeClass : ''" class="choose-language" alt="ESP" title="ESPAÑOL">
-            
-            <img src="img/languages/fr.svg" @click="changeLanguage('fr-FR', '')" :class="(language == 'fr-FR') ? activeClass : ''" class="choose-language" alt="FR" title="FRANÇAIS">
-            
-            <img src="img/languages/ru.svg" @click="changeLanguage('ru-RU', '')" :class="(language == 'ru-RU') ? activeClass : ''" class="choose-language" alt="RUS" title="РУССКИЙ">
-            
-            <img src="img/languages/en.svg" @click="changeLanguage('en-US', '')" :class="(language == 'en-US') ? activeClass : ''" class="choose-language" alt="ENG" title="ENGLISH"> -->
-
-            <img v-for="lang in languages" :src="imgPath + lang + imgFormat" :class="(lang == language) ? activeClass : ''" class="choose-language" @click="changeLanguage(lang, '')" alt="">
-
-            <small id="selected-language">ENG</small>
+            <img v-for="lang in languages" :src=" 'img/languages/' + lang + '.svg' " :class=" (lang == language) ? activeClass : '' " class="language" @click="changeLanguage(lang)" :alt="lang">
 
         </section>
 
@@ -62,33 +51,31 @@
             <!-- ! Movies ! -->
             <div class="row">
 
-                <div class="content-box" v-for="movie in movies">
+                <div class="content-box" v-for="searchedMovie in searchedMovies">
 
                     <!-- Cover -->
-                    <img v-if="movie.poster_path != null" :src="urlImg + movie.poster_path" class="cover" alt="Cover">
+                    <img v-if="searchedMovie.poster_path != null" :src="urlCover + searchedMovie.poster_path" class="cover" alt="Cover">
                     <img v-else src="img/image-notfound.png" class="cover" alt="IMAGE NOT FOUND">
 
                     <!-- Original Title -->
-                    <h3>{{movie.original_title}}</h3>
+                    <h3>{{searchedMovie.original_title}}</h3>
 
-                    <!-- <h6>{{movie.title}}</h6> -->
-                    <h6 v-if="language != 'en-US' && movie.original_title != movie.title">{{movie.title}}</h6>
+                    <!-- <h6>{{searchedMovie.title}}</h6> -->
+                    <h6 v-if="searchedMovie.original_title != searchedMovie.title">{{searchedMovie.title}}</h6>
 
                     <!-- Overview -->
-                    <p>{{movie.overview}}</p>
+                    <p>{{searchedMovie.overview}}</p>
 
                     <p>
-
                         <!-- Original Language -->
-                        <img v-if="languages.includes(movie.original_language)" :src="imgPath + movie.original_language + imgFormat" :alt="movie.original_language">
+                        <img v-if="languages.includes(searchedMovie.original_language)" :src=" 'img/languages/' + searchedMovie.original_language + '.svg' " :alt="searchedMovie.original_language">
     
                         <!-- Release Date -->
-                        <small><i class="far fa-calendar-alt"></i> {{movie.release_date}}</small>
-
+                        <small><i class="far fa-calendar-alt"></i> {{searchedMovie.release_date}}</small>
                     </p>
                     
                     <!-- Vote (view as stars) -->
-                    <p><small>{{movie.vote_average}}/5</small> <span><i v-for="(i,index) in 5" :class="(index >= movie.vote_average) ? 'empty-stars' : ''" class="fas fa-star"></i></span></p>
+                    <p><small>{{searchedMovie.vote_average}}/5</small> <span><i v-for="(i,index) in 5" :class=" (index >= searchedMovie.vote_average) ? 'empty-stars' : '' " class="fas fa-star"></i></span></p>
     
                 </div>
 
@@ -97,39 +84,35 @@
             <!-- ! TV Series ! -->
             <div class="row">
 
-                <div class="content-box" v-for="tvserie in tvSeries">
+                <div class="content-box" v-for="searchedTvSerie in searchedTvSeries">
 
                     <!-- Cover -->
-                    <img v-if="tvserie.poster_path != null" :src="urlImg + tvserie.poster_path" class="cover" alt="Cover">
-                    <img v-else src="img/image-notfound.png" class="cover" alt="">
+                    <img v-if="searchedTvSerie.poster_path != null" :src="urlCover + searchedTvSerie.poster_path" class="cover" alt="Cover">
+                    <img v-else src="img/image-notfound.png" class="cover" alt="IMAGE NOT FOUND">
 
                     <!-- Original Title -->
-                    <h3>{{tvserie.original_name}}</h3>
+                    <h3>{{searchedTvSerie.original_name}}</h3>
 
                     <!-- <h6>{{movie.title}}</h6> -->
-                    <h6 v-if="languages == 'it-IT' && tvserie.original_title != tvserie.title">{{tvserie.title}}</h6>
+                    <h6 v-if="searchedTvSerie.original_title != searchedTvSerie.title">{{searchedTvSerie.title}}</h6>
 
                     <!-- Overview -->
-                    <p>{{tvserie.overview}}</p>
+                    <p>{{searchedTvSerie.overview}}</p>
 
                     <p>
-
                         <!-- Original Language -->
-                        <img v-if="languages.includes(tvserie.original_language)" :src="imgPath + tvserie.original_language + imgFormat" :alt="tvserie.original_language">
+                        <img v-if="languages.includes(searchedTvSerie.original_language)" :src=" 'img/languages/' + searchedTvSerie.original_language + '.svg' " :alt="searchedTvSerie.original_language">
 
                         <!-- First Release Date -->
-                        <small><i class="far fa-calendar-alt"></i> {{tvserie.first_air_date}}</small>
-
+                        <small><i class="far fa-calendar-alt"></i> {{searchedTvSerie.first_air_date}}</small>
                     </p>
 
                     <p>
-
                         <!-- Popularity -->
-                        <small><i class="fas fa-users"></i> {{tvserie.popularity}}</small>
+                        <small><i class="fas fa-users"></i> {{searchedTvSerie.popularity}}</small>
 
                         <!-- Vote (view as stars) -->
-                        <small>( {{tvserie.vote_average}}/5 )</small> <span><i v-for="(i,index) in 5" :class="(index >= tvserie.vote_average) ? 'empty-stars' : ''" class="fas fa-star"></i></span>
-
+                        <small>( {{searchedTvSerie.vote_average}}/5 )</small> <span><i v-for="(i,index) in 5" :class="(index >= searchedTvSerie.vote_average) ? 'empty-stars' : ''" class="fas fa-star"></i></span>
                     </p>
     
                 </div>
